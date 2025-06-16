@@ -29,12 +29,9 @@ client = AsyncIOMotorClient(mongo_url)
 db = client[os.environ['DB_NAME']]
 
 # Initialize AI Components
-openai.api_key = os.environ.get('OPENAI_API_KEY', 'demo-key')
+# Note: Running in demo mode without external API keys
 sentence_model = None
-try:
-    sentence_model = SentenceTransformer('all-MiniLM-L6-v2')
-except:
-    print("Sentence transformer not loaded - running in demo mode")
+print("AI components initialized in demo mode")
 
 # Create the main app
 app = FastAPI(title="EchoVerse & EgoCore - Singularity Platform", version="1.0.0")
