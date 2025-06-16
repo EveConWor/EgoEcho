@@ -11,6 +11,10 @@ import EchoVerse from './components/EchoVerse';
 import EgoCore from './components/EgoCore';
 import UserProfile from './components/UserProfile';
 import AIChat from './components/AIChat';
+import SocialFeed from './components/SocialFeed';
+import MonetizationHub from './components/MonetizationHub';
+import VRExplorer from './components/VRExplorer';
+import NavigationMenu from './components/NavigationMenu';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
