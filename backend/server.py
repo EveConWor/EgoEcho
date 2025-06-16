@@ -252,8 +252,13 @@ async def get_leaderboard(category: str = "xp", period: str = "all_time", limit:
 
 # AI Intelligence Endpoints
 @ai_router.post("/chat", tags=["AI"])
-async def advanced_ai_chat(user_id: str, message: str, mode: PlatformMode, context: Dict[str, Any] = None):
+async def advanced_ai_chat(request: dict):
     """Advanced AI chat with memory and personality evolution"""
+    user_id = request.get("user_id")
+    message = request.get("message")
+    mode = PlatformMode(request.get("mode", "echoverse"))
+    context = request.get("context")
+    
     response = await ai_service.generate_advanced_response(user_id, message, mode, context)
     return response
 
