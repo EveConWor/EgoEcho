@@ -15,6 +15,8 @@ import asyncio
 import time
 
 # Import all models and services
+import sys
+sys.path.append('/app/backend')
 from models import *
 from social_service import SocialService
 from ai_service import AdvancedAIService
