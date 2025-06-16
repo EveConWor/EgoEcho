@@ -278,13 +278,16 @@ function App() {
     <div className="App min-h-screen relative">
       <AnimatedBackground mode={currentMode} />
       <BrowserRouter>
-        <ModeToggle />
+        <NavigationMenu />
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/echoverse" element={<EchoVerse />} />
           <Route path="/egocore" element={<EgoCore />} />
           <Route path="/profile" element={<UserProfile />} />
           <Route path="/chat" element={<AIChat />} />
+          <Route path="/social" element={<SocialFeed />} />
+          <Route path="/premium" element={<MonetizationHub />} />
+          <Route path="/vr" element={<VRExplorer />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>
