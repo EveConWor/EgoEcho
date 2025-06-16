@@ -194,8 +194,13 @@ async def accept_connection(connection_id: str):
     return {"success": True, "message": "Connection accepted"}
 
 @social_router.post("/posts", response_model=Post, tags=["Social"])
-async def create_post(user_id: str, content: str, content_type: str = "text", metadata: Dict[str, Any] = None):
+async def create_post(request: dict):
     """Create a new post"""
+    user_id = request.get("user_id")
+    content = request.get("content")
+    content_type = request.get("content_type", "text")
+    metadata = request.get("metadata")
+    
     post = await social_service.create_post(user_id, content, content_type, metadata)
     return post
 
@@ -206,26 +211,36 @@ async def get_social_feed(user_id: str, limit: int = 20, cursor: Optional[str] =
     return feed
 
 @social_router.post("/posts/{post_id}/like", tags=["Social"])
-async def like_post(user_id: str, post_id: str):
+async def like_post(post_id: str, request: dict):
     """Like or unlike a post"""
+    user_id = request.get("user_id")
     liked = await social_service.like_post(user_id, post_id)
     return {"liked": liked}
 
 @social_router.post("/posts/{post_id}/comment", response_model=Comment, tags=["Social"])
-async def add_comment(user_id: str, post_id: str, content: str):
+async def add_comment(post_id: str, request: dict):
     """Add a comment to a post"""
+    user_id = request.get("user_id")
+    content = request.get("content")
     comment = await social_service.create_comment(user_id, post_id, content)
     return comment
 
 @social_router.post("/challenges", response_model=Challenge, tags=["Social"])
-async def create_challenge(creator_id: str, title: str, description: str, category: str, difficulty: str):
+async def create_challenge(request: dict):
     """Create a new community challenge"""
+    creator_id = request.get("creator_id")
+    title = request.get("title")
+    description = request.get("description")
+    category = request.get("category")
+    difficulty = request.get("difficulty")
+    
     challenge = await social_service.create_challenge(creator_id, title, description, category, difficulty)
     return challenge
 
 @social_router.post("/challenges/{challenge_id}/join", tags=["Social"])
-async def join_challenge(user_id: str, challenge_id: str):
+async def join_challenge(challenge_id: str, request: dict):
     """Join a challenge"""
+    user_id = request.get("user_id")
     success = await social_service.join_challenge(user_id, challenge_id)
     return {"success": success}
 
