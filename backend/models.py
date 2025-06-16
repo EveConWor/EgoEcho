@@ -72,6 +72,12 @@ class UserUpdate(BaseModel):
     profile_visibility: Optional[str] = None
     journey_sharing: Optional[bool] = None
 
+# Identity Journey Models
+class IdentityResponse(BaseModel):
+    step: JourneyStep
+    responses: Dict[str, str]
+    timestamp: Optional[str] = None
+
 # Social Models
 class Connection(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
@@ -217,6 +223,13 @@ class Avatar(BaseModel):
     animations: Dict[str, Any] = Field(default_factory=dict)
     is_default: bool = False
     created_at: datetime = Field(default_factory=datetime.utcnow)
+
+# Behavior Tracking
+class BehaviorEvent(BaseModel):
+    user_id: str
+    event_type: str
+    event_data: Dict[str, Any] = Field(default_factory=dict)
+    timestamp: str = Field(default_factory=lambda: datetime.utcnow().isoformat())
 
 # Response Models
 class UserProfile(BaseModel):
