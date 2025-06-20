@@ -498,10 +498,15 @@ app.include_router(analytics_router, prefix="/api")
 app.add_middleware(
     CORSMiddleware,
     allow_credentials=True,
-    allow_origins=["*"],
+    allow_origins=[
+        "https://ego-echo.vercel.app",  
+        "http://localhost:3000",  # For development
+        "*"  # Remove this in production for security
+    ],
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 
 # Configure logging
 logging.basicConfig(
